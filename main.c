@@ -46,14 +46,26 @@ int main()
 								0, 4, 1,	5, 0, 0,	3, 0, 0,
 								0, 0, 0,	0, 1, 0,	6, 0, 0 };
 
+	int sudoku_field4[SIZE][SIZE] = { 0, 0, 0,	0, 0, 3,	0, 2, 1,
+									0, 0, 0,	2, 0, 0,	4, 0, 6,
+									0, 0, 0,	1, 6, 0,	0, 9, 0,
+
+									1, 0, 0,	0, 4, 0,	0, 0, 0,
+									7, 0, 5,	0, 0, 0,	3, 0, 9,
+									0, 0, 0,	0, 7, 0,	0, 0, 5,
+
+									0, 2, 0,	0, 8, 4,	0, 0, 0,
+									5, 0, 4,	0, 0, 9,	0, 0, 0,
+									8, 3, 0,	5, 0, 0,	0, 0, 0 };
+
 	int sudoku_field3[SIZE][SIZE] = { 0 };
 
 	printf("\nUnsolved sudoku:\n");
-	print_board(sudoku_field2);
-	if (solve_sudoku(sudoku_field2, 0, 0))
+	print_board(sudoku_field4);
+	if (solve_sudoku(sudoku_field4, 0, 0))
 	{
 		printf("\nSuccessfully solved sudoku:\n");
-		print_board(sudoku_field2);
+		print_board(sudoku_field4);
 	}
 	else
 		printf("smth went wrong, cant solve sudoku!");
@@ -148,6 +160,8 @@ void copy_board(int SRC[SIZE][SIZE], int DST[SIZE][SIZE])
 
 bool solve_sudoku(int board[SIZE][SIZE], int row, int col)
 {
+	//printf("\n\n");
+	//print_board(board);
 	int nrow, ncol; //next free cell
 	next_free_cell(board, row, col, &nrow, &ncol);
 	if (row > SIZE - 1) //end of board
@@ -173,5 +187,6 @@ bool solve_sudoku(int board[SIZE][SIZE], int row, int col)
 		}
 	}
 
+	free(found);
 	return false;
 }
